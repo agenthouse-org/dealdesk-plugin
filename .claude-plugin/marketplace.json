@@ -1,0 +1,29 @@
+{
+  "name": "agenthouse",
+  "owner": {
+    "name": "agenthouse",
+    "url": "https://agenthouse.org"
+  },
+  "metadata": {
+    "description": "agenthouse plugins",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "dealdesk",
+      "source": "./",
+      "description": "Desk cards, quotes, customers, and portfolio publish on agenthouse.",
+      "version": "0.1.0",
+      "author": {
+        "name": "agenthouse",
+        "url": "https://agenthouse.org"
+      },
+      "homepage": "https://agenthouse.org",
+      "repository": "https://github.com/agenthouse-org/dealdesk-plugin",
+      "license": "MIT",
+      "keywords": ["dealdesk", "agenthouse", "mcp"],
+      "category": "productivity",
+      "logo": "assets/logo.svg"
+    }
+  ]
+}

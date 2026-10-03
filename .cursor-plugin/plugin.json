@@ -1,0 +1,32 @@
+{
+  "name": "dealdesk",
+  "displayName": "DealDesk",
+  "version": "0.1.0",
+  "description": "DealDesk skills, slash commands, and a local MCP bridge for desk cards, quotes, customers, and portfolio publish.",
+  "author": {
+    "name": "agenthouse",
+    "url": "https://agenthouse.org"
+  },
+  "homepage": "https://github.com/agenthouse-org/dealdesk-plugin",
+  "repository": "https://github.com/agenthouse-org/dealdesk-plugin",
+  "license": "MIT",
+  "keywords": ["agenthouse", "dealdesk", "mcp", "quotes"],
+  "logo": "assets/logo.svg",
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "mcpServers": "./.cursor-plugin/mcp.json",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "AGENTHOUSE_API_KEY": {
+        "type": "string",
+        "description": "Project API key from agenthouse Access management. Grant dealdesk:read, or dealdesk:access for writes."
+      },
+      "AGENTHOUSE_PROJECT_ID": {
+        "type": "string",
+        "description": "DealDesk project id (tenant id) used when a tool call omits projectId."
+      }
+    },
+    "required": ["AGENTHOUSE_API_KEY", "AGENTHOUSE_PROJECT_ID"]
+  }
+}

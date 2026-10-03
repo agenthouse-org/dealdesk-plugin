@@ -30,6 +30,16 @@
   "files": [
     "bin",
     "skills",
+    "commands",
+    "scripts",
+    "assets",
+    "plugin.json",
+    "mcp.json",
+    ".mcp.json",
+    ".codex-plugin",
+    ".claude-plugin",
+    ".cursor-plugin",
+    ".agents",
     "README.md",
     "LICENSE",
     "AGENTS.md"
@@ -38,6 +48,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "start": "node bin/dealdesk-plugin.js"
+    "start": "node bin/dealdesk-plugin.js",
+    "test": "node scripts/validate-skills.js"
   }
 }

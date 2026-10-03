@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "dealdesk": {
+      "command": "node",
+      "args": ["${CURSOR_PLUGIN_ROOT}/bin/dealdesk-plugin.js"],
+      "env": {
+        "AGENTHOUSE_API_URL": "https://api.agenthouse.org",
+        "AGENTHOUSE_API_KEY": "${AGENTHOUSE_API_KEY}",
+        "AGENTHOUSE_PROJECT_ID": "${AGENTHOUSE_PROJECT_ID}"
+      }
+    }
+  }
+}

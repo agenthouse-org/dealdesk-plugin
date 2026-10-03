@@ -1,0 +1,31 @@
+{
+  "name": "dealdesk",
+  "version": "0.1.0",
+  "description": "DealDesk skills and MCP tools for desk cards, email logs, quotes, customers, and portfolio publish.",
+  "author": {
+    "name": "agenthouse",
+    "url": "https://agenthouse.org"
+  },
+  "homepage": "https://agenthouse.org",
+  "repository": "https://github.com/agenthouse-org/dealdesk-plugin",
+  "license": "MIT",
+  "keywords": ["agenthouse", "dealdesk", "mcp", "quotes"],
+  "logo": "assets/logo.svg",
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json",
+  "interface": {
+    "displayName": "DealDesk",
+    "shortDescription": "Desk cards, quotes, customers, and portfolio publish on agenthouse.",
+    "longDescription": "Operate DealDesk from ChatGPT or Codex. Tools run on the agenthouse MCP endpoint. Delete is not available.",
+    "developerName": "agenthouse",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://agenthouse.org",
+    "privacyPolicyURL": "https://agenthouse.org/privacy/",
+    "logoURL": "https://raw.githubusercontent.com/agenthouse-org/dealdesk-plugin/main/assets/logo.svg",
+    "defaultPrompt": [
+      "List open DealDesk cards for my project.",
+      "Log this inbound email on the matching desk card."
+    ]
+  }
+}

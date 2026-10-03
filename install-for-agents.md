@@ -15,6 +15,16 @@ Read this file end to end before editing their machine. Do not invent URLs, pack
 
 ---
 
+## Customer data responsibility (tell the human)
+
+Before completing Connect or creating an API key, tell the user clearly:
+
+> DealDesk tools can return customer and deal data to this AI host and to any other tools in the same conversation. **You** are responsible for which hosts, models, and tools you authorize and for lawful handling of that data.
+
+Do not skip this warning. Prefer pointing them at the Connect consent screen or the API-key form in agenthouse, which also show it.
+
+---
+
 ## Goal
 
 DealDesk tools are available in the user’s host, authenticated to **their** project, and a simple list-cards prompt succeeds.
@@ -152,6 +162,7 @@ Expect names such as `dealdesk.list_cards`, `dealdesk.create_card`, `dealdesk.lo
 ## After install — correct usage (brief)
 
 - **Card description** → `dealdesk.patch_card` / `create_card` with `description` (not unstructured “notes” as the main body).
+- **Card company/contact** → `companyId` / `contactId` on `create_card` or `patch_card` (`null` clears).
 - **Internal note** → `dealdesk.add_card_note`.
 - **Log email** → `dealdesk.log_email` (status-update touchpoint). **Never** store email as a card note.
 - **Soft-close** → update stage; delete tools are not offered.

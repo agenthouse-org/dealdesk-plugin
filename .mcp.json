@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dealdesk": {
+      "type": "http",
+      "url": "https://api.agenthouse.org/mcp/dealdesk"
+    }
+  }
+}

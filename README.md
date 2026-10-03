@@ -22,6 +22,10 @@ If you are an AI assistant helping someone install DealDesk, follow **[install-f
 
 Destructive delete operations are not available. Soft-close cards by updating their stage instead.
 
+## Customer data responsibility
+
+**Warning:** DealDesk tools can return customer and deal data to the AI host you connect, to that host's model providers, and to any other tools available in the same conversation. By installing or connecting this plugin you acknowledge that **you** are responsible for which hosts, models, and tools you authorize and for lawful handling of that data. agenthouse does not control third-party AI hosts or tools you enable alongside DealDesk.
+
 ## Before you start
 
 You need:
@@ -98,9 +102,9 @@ After install, ask your assistant something concrete, for example:
 
 You should see DealDesk tools available (such as listing cards or creating a quote from a configuration). If authentication fails, renew Connect or check that the API key has DealDesk permission for that tenant.
 
-## Skills
+## Skills and slash commands
 
-Guided skills for common sales workflows (cards, email and notes, classic and portfolio quotes, customers, cases, orders, export, and portfolio publish). Your host may surface these as prompts or skills depending on the product. See [`skills/`](./skills/).
+Guided skills live in [`skills/`](./skills/). Matching slash commands live in [`commands/`](./commands/): `/dealdesk-help`, `/create-card`, `/log-email`, `/craft-quote`, `/quote`, `/evaluate`, `/directory-activity`, `/find-customer`, `/share-quote`, `/export`, `/publish`. Start with `/dealdesk-help` for an overview (the agent should call `dealdesk.list_skills` / `dealdesk.discover`). A host may prefix commands with the plugin name (for example `/dealdesk:log-email`).
 
 ## Support
 

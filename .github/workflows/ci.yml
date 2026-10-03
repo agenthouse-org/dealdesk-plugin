@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate skills
+        run: npm test
+      - name: Validate JSON manifests
+        run: |
+          node -e "
+          const fs = require('fs');
+          const paths = [
+            'package.json',
+            'plugin.json',
+            'mcp.json',
+            '.mcp.json',
+            '.cursor-plugin/plugin.json',
+            '.cursor-plugin/mcp.json',
+            '.cursor-plugin/marketplace.json',
+            '.claude-plugin/plugin.json',
+            '.claude-plugin/marketplace.json',
+            '.codex-plugin/plugin.json',
+            '.agents/plugins/marketplace.json'
+          ];
+          for (const p of paths) {
+            JSON.parse(fs.readFileSync(p, 'utf8'));
+            console.log('OK', p);
+          }
+          "
+      - name: Check logo asset
+        run: |
+          test -f assets/logo.svg
+          node -e "
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('.cursor-plugin/plugin.json','utf8'));
+          if (!p.logo) throw new Error('missing logo in .cursor-plugin/plugin.json');
+          if (!fs.existsSync(p.logo)) throw new Error('logo file missing: ' + p.logo);
+          console.log('OK logo', p.logo);
+          "

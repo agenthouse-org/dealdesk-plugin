@@ -1,15 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="DealDesk">
-  <!-- ~20% padding so marketplace tiles do not clip the mark -->
-  <rect width="128" height="128" rx="28" fill="#0F2A2E"/>
-  <g transform="translate(28, 30)">
-    <!-- stacked desk cards -->
-    <rect x="8" y="4" width="56" height="40" rx="6" fill="#1C4A52"/>
-    <rect x="0" y="14" width="56" height="40" rx="6" fill="#2F6F78"/>
-    <rect x="0" y="14" width="56" height="40" rx="6" fill="none" stroke="#8FD0D6" stroke-width="2"/>
-    <!-- accent bar / deal signal -->
-    <rect x="10" y="26" width="28" height="5" rx="2.5" fill="#E8F4F5"/>
-    <rect x="10" y="36" width="18" height="5" rx="2.5" fill="#8FD0D6"/>
-    <!-- check mark -->
-    <path d="M42 34l5 5 10-12" fill="none" stroke="#F4C15D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
+  <title>DealDesk</title>
+  <rect x="0.5" y="0.5" width="127" height="127" rx="27.5" fill="#090B09" stroke="#1B201B"/>
+  <path fill="#F0F0F0" fill-rule="evenodd" d="
+    M36 28 H64 A36 36 0 0 1 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z
+    M46 42 H64 A22 22 0 0 1 64 86 H46 Z"/>
+  <path fill="#9EFF3D" d="M64 54 L74 64 L64 74 L54 64 Z"/>
 </svg>

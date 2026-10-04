@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="DealDesk">
+  <title>DealDesk</title>
+  <style>
+    .still{display:none}
+    @media (prefers-reduced-motion: reduce){.motion{display:none}.still{display:inline}}
+  </style>
+  <rect x="0.5" y="0.5" width="127" height="127" rx="27.5" fill="#090B09" stroke="#1B201B"/>
+  <g class="still">
+    <path fill="#F0F0F0" fill-rule="evenodd" d="M36 28 H64 C73.55 28 82.7 31.79 89.46 38.54 C96.21 45.3 100 54.45 100 64 C100 73.55 96.21 82.7 89.46 89.46 C82.7 96.21 73.55 100 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z M46 42 H64 C69.83 42 75.43 44.32 79.56 48.44 C83.68 52.57 86 58.17 86 64 C86 69.83 83.68 75.43 79.56 79.56 C75.43 83.68 69.83 86 64 86 H46 Z"/>
+    <path fill="#9EFF3D" d="M64 54 L74 64 L64 74 L54 64 Z"/>
+  </g>
+  <g class="motion" fill="#F0F0F0">
+    <path fill-rule="evenodd" d="M36 28 H64 C73.55 28 82.7 31.79 89.46 38.54 C96.21 45.3 100 54.45 100 64 C100 73.55 96.21 82.7 89.46 89.46 C82.7 96.21 73.55 100 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z M46 42 H64 C69.83 42 75.43 44.32 79.56 48.44 C83.68 52.57 86 58.17 86 64 C86 69.83 83.68 75.43 79.56 79.56 C75.43 83.68 69.83 86 64 86 H46 Z">
+      <animate attributeName="d" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.17;0.29;0.74;0.86;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="M36 28 H64 C73.55 28 82.7 31.79 89.46 38.54 C96.21 45.3 100 54.45 100 64 C100 73.55 96.21 82.7 89.46 89.46 C82.7 96.21 73.55 100 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z M46 42 H64 C69.83 42 75.43 44.32 79.56 48.44 C83.68 52.57 86 58.17 86 64 C86 69.83 83.68 75.43 79.56 79.56 C75.43 83.68 69.83 86 64 86 H46 Z;M36 28 H64 C73.55 28 82.7 31.79 89.46 38.54 C96.21 45.3 100 54.45 100 64 C100 73.55 96.21 82.7 89.46 89.46 C82.7 96.21 73.55 100 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z M46 42 H64 C69.83 42 75.43 44.32 79.56 48.44 C83.68 52.57 86 58.17 86 64 C86 69.83 83.68 75.43 79.56 79.56 C75.43 83.68 69.83 86 64 86 H46 Z;M17 34.01 H25.45 C29.5 34.01 32.62 35.11 34.81 37.32 C36.99 39.53 38.08 42.67 38.08 46.75 C38.08 50.81 37.01 53.94 34.86 56.13 C32.71 58.33 29.65 59.43 25.66 59.43 H17 A0 0 0 0 1 17 59.43 V34.01 A0 0 0 0 1 17 34.01 Z M21.65 38.06 H25.45 C28.06 38.06 30.02 38.78 31.33 40.23 C32.63 41.68 33.29 43.85 33.29 46.75 C33.29 49.63 32.63 51.79 31.33 53.22 C30.02 54.66 28.06 55.38 25.45 55.38 H21.65 Z;M17 34.01 H25.45 C29.5 34.01 32.62 35.11 34.81 37.32 C36.99 39.53 38.08 42.67 38.08 46.75 C38.08 50.81 37.01 53.94 34.86 56.13 C32.71 58.33 29.65 59.43 25.66 59.43 H17 A0 0 0 0 1 17 59.43 V34.01 A0 0 0 0 1 17 34.01 Z M21.65 38.06 H25.45 C28.06 38.06 30.02 38.78 31.33 40.23 C32.63 41.68 33.29 43.85 33.29 46.75 C33.29 49.63 32.63 51.79 31.33 53.22 C30.02 54.66 28.06 55.38 25.45 55.38 H21.65 Z;M36 28 H64 C73.55 28 82.7 31.79 89.46 38.54 C96.21 45.3 100 54.45 100 64 C100 73.55 96.21 82.7 89.46 89.46 C82.7 96.21 73.55 100 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z M46 42 H64 C69.83 42 75.43 44.32 79.56 48.44 C83.68 52.57 86 58.17 86 64 C86 69.83 83.68 75.43 79.56 79.56 C75.43 83.68 69.83 86 64 86 H46 Z;M36 28 H64 C73.55 28 82.7 31.79 89.46 38.54 C96.21 45.3 100 54.45 100 64 C100 73.55 96.21 82.7 89.46 89.46 C82.7 96.21 73.55 100 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z M46 42 H64 C69.83 42 75.43 44.32 79.56 48.44 C83.68 52.57 86 58.17 86 64 C86 69.83 83.68 75.43 79.56 79.56 C75.43 83.68 69.83 86 64 86 H46 Z"/>
+      <animate attributeName="fill" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.19;0.29;0.74;0.83;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="#F0F0F0;#F0F0F0;#9EFF3D;#9EFF3D;#F0F0F0;#F0F0F0"/>
+    </path>
+    <path fill="#9EFF3D" d="M64 54 L74 64 L64 74 L54 64 Z">
+      <animate attributeName="d" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.17;0.29;0.74;0.86;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="M64 54 L74 64 L64 74 L54 64 Z;M64 54 L74 64 L64 74 L54 64 Z;M27.47 46.72 L27.47 46.72 L27.47 46.72 L27.47 46.72 Z;M27.47 46.72 L27.47 46.72 L27.47 46.72 L27.47 46.72 Z;M64 54 L74 64 L64 74 L54 64 Z;M64 54 L74 64 L64 74 L54 64 Z"/>
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.17;0.23;0.79;0.86;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="1;1;0;0;1;1"/>
+    </path>
+    <path fill="#9EFF3D" opacity="0" d="M60.78 59.43L43.38 59.43L43.38 34.01L60.49 34.01L60.49 38.06L48.04 38.06L48.04 44.68L60.06 44.68L60.06 48.69L48.04 48.69L48.04 55.38L60.78 55.38">
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.22;0.31;0.74;0.79;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="0;0;1;1;0;0"/>
+      <animateTransform attributeName="transform" type="translate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.22;0.31;0.74;0.79;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="-4 0;-4 0;0 0;0 0;-4 0;-4 0"/>
+    </path>
+    <path fill="#9EFF3D" opacity="0" d="M68.80 59.43L63.93 59.43L73.09 34.01L78.78 34.01L87.95 59.43L83.08 59.43L80.97 53.41L70.91 53.41L68.80 59.43M75.96 38.70L72.27 49.44L79.61 49.44">
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.25;0.33;0.72;0.77;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="0;0;1;1;0;0"/>
+      <animateTransform attributeName="transform" type="translate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.25;0.33;0.72;0.77;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="-4 0;-4 0;0 0;0 0;-4 0;-4 0"/>
+    </path>
+    <path fill="#9EFF3D" opacity="0" d="M108.32 59.43L91.60 59.43L91.60 34.01L96.25 34.01L96.25 55.38L108.32 55.38">
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27;0.36;0.71;0.76;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="0;0;1;1;0;0"/>
+      <animateTransform attributeName="transform" type="translate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27;0.36;0.71;0.76;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="-4 0;-4 0;0 0;0 0;-4 0;-4 0"/>
+    </path>
+    <path fill="#F0F0F0" opacity="0" fill-rule="evenodd" d="M17 68.57 H25.45 C29.5 68.57 32.62 69.68 34.81 71.89 C36.99 74.09 38.08 77.24 38.08 81.32 C38.08 85.37 37.01 88.5 34.86 90.7 C32.71 92.89 29.65 93.99 25.66 93.99 H17 A0 0 0 0 1 17 93.99 V68.57 A0 0 0 0 1 17 68.57 Z M21.65 72.62 H25.45 C28.06 72.62 30.02 73.34 31.33 74.79 C32.63 76.24 33.29 78.42 33.29 81.32 C33.29 84.19 32.63 86.35 31.33 87.79 C30.02 89.23 28.06 89.94 25.45 89.94 H21.65 Z">
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.25;0.33;0.72;0.77;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="0;0;1;1;0;0"/>
+      <animateTransform attributeName="transform" type="translate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.25;0.33;0.72;0.77;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="-4 0;-4 0;0 0;0 0;-4 0;-4 0"/>
+    </path>
+    <path fill="#F0F0F0" opacity="0" d="M60.78 93.99L43.38 93.99L43.38 68.57L60.49 68.57L60.49 72.62L48.04 72.62L48.04 79.24L60.06 79.24L60.06 83.25L48.04 83.25L48.04 89.94L60.78 89.94">
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27;0.36;0.71;0.76;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="0;0;1;1;0;0"/>
+      <animateTransform attributeName="transform" type="translate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27;0.36;0.71;0.76;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="-4 0;-4 0;0 0;0 0;-4 0;-4 0"/>
+    </path>
+    <path fill="#F0F0F0" opacity="0" d="M75.71 94.56Q72.56 94.56 70.26 93.45Q67.97 92.34 66.67 90.36Q65.36 88.37 65.15 85.72L69.87 85.43Q70.19 87.90 71.66 89.23Q73.13 90.55 75.78 90.55Q78.03 90.55 79.27 89.71Q80.50 88.87 80.50 87.26Q80.50 86.29 80.04 85.54Q79.57 84.79 78.25 84.15Q76.92 83.50 74.31 82.89Q71.16 82.18 69.26 81.26Q67.36 80.35 66.51 78.97Q65.65 77.60 65.65 75.52Q65.65 73.30 66.76 71.60Q67.87 69.90 69.91 68.95Q71.95 68 74.81 68Q77.85 68 79.98 69.09Q82.11 70.19 83.31 72.08Q84.51 73.98 84.80 76.45L80.11 76.66Q79.86 74.59 78.50 73.30Q77.14 72.01 74.74 72.01Q72.73 72.01 71.57 72.94Q70.41 73.87 70.41 75.34Q70.41 76.38 70.89 77.06Q71.37 77.74 72.63 78.24Q73.88 78.74 76.13 79.24Q79.54 79.99 81.54 81.09Q83.54 82.18 84.40 83.64Q85.26 85.11 85.26 87.01Q85.26 89.34 84.06 91.04Q82.86 92.74 80.73 93.65Q78.60 94.56 75.71 94.56">
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.29;0.38;0.69;0.74;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="0;0;1;1;0;0"/>
+      <animateTransform attributeName="transform" type="translate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.29;0.38;0.69;0.74;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="-4 0;-4 0;0 0;0 0;-4 0;-4 0"/>
+    </path>
+    <path fill="#F0F0F0" opacity="0" d="M94.93 93.99L90.27 93.99L90.27 68.57L94.93 68.57L94.93 80.17L104.88 68.57L110.39 68.57L100.87 79.74L111 93.99L105.67 93.99L97.79 82.93L94.93 86.19">
+      <animate attributeName="opacity" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.32;0.4;0.68;0.73;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="0;0;1;1;0;0"/>
+      <animateTransform attributeName="transform" type="translate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.32;0.4;0.68;0.73;1" keySplines=".16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1;.16 1 .3 1" values="-4 0;-4 0;0 0;0 0;-4 0;-4 0"/>
+    </path>
+  </g>
+</svg>

@@ -1,18 +1,59 @@
 ---
 name: dealdesk-create-card
-description: Create or update a DealDesk desk card (title, stage, description, company/contact). Use when the user wants a new card, a stage change, a description edit, or to link/unlink Customer Directory company and contact. Never delete a card.
+description: Create or update a DealDesk desk card (title, stage, description, owner, priority, company/contact, deal estimates, quote value override). Use when the user wants a new card, a stage/owner change, estimates, or directory links. Never delete a card.
 ---
 
 # Create or update a desk card
 
-Tools: `dealdesk.create_card`, `dealdesk.patch_card`, `dealdesk.get_card`, `dealdesk.list_cards`
+Tools: `dealdesk.create_card`, `dealdesk.patch_card`, `dealdesk.get_card`, `dealdesk.list_cards`, `dealdesk.list_desk_stages`, `dealdesk.list_desk_users`, `dealdesk.list_card_activity`
 
-Create a card or update title, stage, **description**, and Customer Directory links. Soft-close work by setting an appropriate closed stage rather than deleting.
+Create a card or update title, stage, description, owner, priority, Customer Directory links, deal estimates, and quote deal-value override. Soft-close by setting stage `closed` rather than deleting.
 
-Use `description` for the main card body text. Use `deskDescription` for a local desk-only description when needed. Use `dealdesk.add_card_note` only for structured notes (title + body), not as a substitute for the card description.
+Use `description` for the main card body. Use `deskDescription` for a local desk-only description. Use `dealdesk.add_card_note` only for structured notes, not as a substitute for the card description.
 
-To link a company or contact after create, call `dealdesk.patch_card` with `companyId` and/or `contactId` (Customer Directory ids). Pass `null` to clear. Clearing `companyId` also clears the contact. Resolve ids with directory list/get tools when the user names a customer instead of an id.
+## Stages (discrete column ids)
 
-When company/contact changes, the server also updates a linked local case and quote customer link (same as the DealDesk UI). You do not need separate `patch_case` or quote-link calls for that follow-up.
+`stage` is a **board column id**, not a UI label. Call `dealdesk.list_desk_stages` and use a returned `columnId`. Never slugify a German/English label into a stage string (e.g. do **not** send `anfrage-in-bearbeitung`). That creates a ghost column and the card vanishes from the board.
 
-Do **not** use notes to log customer email. Use the `dealdesk-log-card-activity` skill (`dealdesk.log_email`).
+Default board (when the project has not customized columns):
+
+| columnId | EN | DE |
+| --- | --- | --- |
+| `request` | Open request | Offene Anfrage |
+| `request-in-progress` | Request in progress | Anfrage in Bearbeitung |
+| `quote-preparation` | Quote in preparation | Angebot in Bearbeitung |
+| `quote-sent` | Quote sent | Angebot gesendet |
+| `quote-accepted` | Quote accepted | Angebot angenommen |
+| `order-processing` | Order processing | Auftrag in Vorbereitung |
+| `order-completed` | Order completed | Auftrag abgeschlossen |
+| `closed` | Closed | Geschlossen |
+
+Tenants may add column ids — only use ids from `list_desk_stages`.
+
+## Owner and priority
+
+Resolve assignees with `dealdesk.list_desk_users`, then set `ownerUserId` on create/patch. Pass `null` on `patch_card` to clear. Filter with `list_cards` + `ownerUserId`. `priority` is free text (default `normal`).
+
+## Deal value, period, and win chance
+
+Set on the card with `create_card` / `patch_card`:
+
+- `estimatedValue`, `estimatedValueCurrency`, `estimatedValuePeriod` (`one_time` | `month` | `year`), `probabilityPercent`
+
+Use `year` for per-year / ARR. Do not invent synonyms (`annual`, `yearly`, `monthly`).
+
+When the card has a linked local case, the server updates that case (UI parity) and returns `caseId` when present. Do **not** call `create_case` just to set estimates — that creates a second desk item.
+
+## Quote deal-value override
+
+On an unaccepted quote card, `dealValueOverride` + `dealValueOverrideNet` replace quote net on the board/overview (same as the UI). Ignored after accept, decline, or when an order exists. Clear with `dealValueOverrideNet=null`.
+
+## Company / contact
+
+`patch_card` with `companyId` / `contactId` (or `null` to clear). Clearing company also clears contact. Company/contact changes also sync a linked local case and quote customer link.
+
+## History
+
+`dealdesk.list_card_activity` returns stage/owner/account/note/quote/order/share milestones (not the comment/email timeline — that is status updates).
+
+Do **not** use notes to log customer email. Use `dealdesk-log-card-activity` (`dealdesk.log_email`).

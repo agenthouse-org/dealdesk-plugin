@@ -190,6 +190,7 @@ Expect names such as `dealdesk.list_cards`, `dealdesk.create_card`, `dealdesk.lo
 | Symptom | What to check |
 | --- | --- |
 | Sign-in page did not open | The connector logs the page address. Ask them to open it, finish Connect, then retry. On Cursor, prefer the DealDesk plugin (it opens the page itself) over a remote URL whose browser redirect never appears. |
+| DealDesk is installed but missing from the tool list | The sign-in page is still open, or Connect was not finished. There is no status file to edit. Finish the agenthouse page in the browser; tools show up after that. A user-wide install works in any window, including the home window. |
 | Unauthorized / invalid token | Saved sign-in expired, or an API key was revoked or aimed at the wrong API. Sign in again, or replace the key. |
 | Forbidden / DealDesk denied | OAuth grant or API key is missing DealDesk access for that project. |
 | Wrong project / empty data | The project chosen on the Connect page, or `AGENTHOUSE_PROJECT_ID`, is a different tenant. |

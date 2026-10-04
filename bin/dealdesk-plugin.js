@@ -30,6 +30,9 @@ const PROJECT_ID = String(process.env.AGENTHOUSE_PROJECT_ID || '').trim();
 const SCOPE = 'dealdesk:access';
 const LOGIN_TIMEOUT_MS = 5 * 60 * 1000;
 const SESSION_PATH = path.join(os.homedir(), '.agenthouse', 'dealdesk-oauth.json');
+const LOCK_PATH = path.join(os.homedir(), '.agenthouse', 'dealdesk-oauth.lock');
+const ERROR_PATH = path.join(os.homedir(), '.agenthouse', 'dealdesk-oauth.error');
+const URL_PATH = path.join(os.homedir(), '.agenthouse', 'dealdesk-oauth.url');
 
 const session = {
   accessToken: '',
@@ -41,9 +44,6 @@ const session = {
   apiUrl: API_URL
 };
 
-let loginPromise = null;
-let lastLoginError = null;
-let browserOpened = false;
 let authorizeUrl = '';
 let oauthMeta = null;
 
@@ -288,7 +288,7 @@ function openBrowser(url) {
   return new Promise((resolve) => {
     let child;
     if (process.platform === 'win32') {
-      child = spawn('cmd.exe', ['/d', '/s', '/c', `start "" "${url}"`], {
+      child = spawn('rundll32.exe', ['url.dll,FileProtocolHandler', url], {
         detached: true,
         stdio: 'ignore',
         windowsHide: true
@@ -305,6 +305,62 @@ function openBrowser(url) {
     child.on('spawn', () => resolve(true));
     child.unref();
   });
+}
+
+function pidAlive(pid) {
+  if (!Number.isInteger(pid) || pid <= 0) return false;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+function readLock() {
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(LOCK_PATH, 'utf8'));
+  } catch (err) {
+    return null;
+  }
+  if (!data || data.apiUrl !== API_URL) return null;
+  if (data.pid === 'pending' && Date.now() - Number(data.at || 0) < 15000) return data;
+  if (pidAlive(Number(data.pid))) return data;
+  return null;
+}
+
+function spawnLoginHelper() {
+  if (readLock()) return;
+  fs.mkdirSync(path.dirname(LOCK_PATH), { recursive: true });
+  try {
+    const fd = fs.openSync(LOCK_PATH, 'wx');
+    fs.writeFileSync(fd, JSON.stringify({ pid: 'pending', apiUrl: API_URL, at: Date.now() }));
+    fs.closeSync(fd);
+  } catch (err) {
+    if (err.code === 'EEXIST') {
+      if (readLock()) return;
+      try { fs.unlinkSync(LOCK_PATH); } catch (unlinkErr) { return; }
+      spawnLoginHelper();
+      return;
+    }
+    throw err;
+  }
+  try { fs.unlinkSync(ERROR_PATH); } catch (err) { /* no previous error */ }
+  try { fs.unlinkSync(URL_PATH); } catch (err) { /* no previous url */ }
+  const child = spawn(process.execPath, [__filename, '--login'], {
+    detached: true,
+    stdio: 'ignore',
+    windowsHide: true,
+    env: process.env
+  });
+  child.on('error', (err) => {
+    try { fs.unlinkSync(LOCK_PATH); } catch (unlinkErr) { /* lock already removed */ }
+    try { fs.writeFileSync(ERROR_PATH, err.message); } catch (writeErr) { /* best effort */ }
+    log(`Could not open DealDesk sign-in: ${err.message}`);
+  });
+  child.unref();
+  log('Opening the agenthouse sign-in page for DealDesk.');
 }
 
 function listenLoopback(port) {
@@ -384,6 +440,11 @@ async function interactiveLogin() {
     authorize.searchParams.set('code_challenge_method', 'S256');
     authorize.searchParams.set('resource', resourceUrl());
     authorizeUrl = authorize.toString();
+    try {
+      fs.writeFileSync(URL_PATH, authorizeUrl, { mode: 0o600 });
+    } catch (err) {
+      log(`Could not record the sign-in page: ${err.message}`);
+    }
 
     const code = await new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
@@ -428,7 +489,6 @@ async function interactiveLogin() {
       };
       server.on('request', onRequest);
       openBrowser(authorizeUrl).then((opened) => {
-        browserOpened = opened;
         if (!opened) log(`Sign in at: ${authorizeUrl}`);
       });
     });
@@ -450,30 +510,6 @@ async function interactiveLogin() {
   }
 }
 
-function startInteractiveLogin() {
-  if (!loginPromise) {
-    loginPromise = interactiveLogin().then((token) => {
-      lastLoginError = null;
-      return token;
-    }).catch((err) => {
-      loginPromise = null;
-      lastLoginError = err;
-      throw err;
-    });
-  }
-  return loginPromise;
-}
-
-function pendingMessage() {
-  if (browserOpened) {
-    return 'DealDesk sign-in is open in your browser. Finish signing in on agenthouse, choose the project, grant access, then try again.';
-  }
-  if (authorizeUrl) {
-    return `Open this page to sign in to DealDesk, then try again: ${authorizeUrl}`;
-  }
-  return 'DealDesk sign-in has not finished. Try again in a moment.';
-}
-
 async function bootstrap() {
   if (API_KEY) {
     log(`connected to ${API_URL}`);
@@ -490,8 +526,25 @@ async function bootstrap() {
     log(`refreshed DealDesk sign-in for ${API_URL}`);
     return;
   }
-  log('Opening the agenthouse sign-in page for DealDesk.');
-  startInteractiveLogin().catch((err) => log(String(err && err.message || err)));
+  spawnLoginHelper();
+}
+
+async function loginMain() {
+  loadSession();
+  fs.mkdirSync(path.dirname(LOCK_PATH), { recursive: true });
+  fs.writeFileSync(LOCK_PATH, JSON.stringify({ pid: process.pid, apiUrl: API_URL, at: Date.now() }));
+  try {
+    if (!validAccess() && !(await refreshSession())) await interactiveLogin();
+    else await discoverProjectId();
+    try { fs.unlinkSync(ERROR_PATH); } catch (err) { /* clear stale error */ }
+  } catch (err) {
+    const message = String(err && err.message || err);
+    try { fs.writeFileSync(ERROR_PATH, message); } catch (writeErr) { log(writeErr.message); }
+    log(message);
+    process.exitCode = 1;
+  } finally {
+    try { fs.unlinkSync(LOCK_PATH); } catch (err) { /* lock already removed */ }
+  }
 }
 
 let bootPromise = null;
@@ -504,16 +557,31 @@ async function getBearer() {
   await boot();
   if (API_KEY) return API_KEY;
   if (validAccess()) return session.accessToken;
-  startInteractiveLogin().catch((err) => log(String(err && err.message || err)));
+  spawnLoginHelper();
+  let loggedUrl = false;
   const started = Date.now();
-  while (!validAccess() && !authorizeUrl && !(lastLoginError && !loginPromise) && Date.now() - started < 15000) {
-    await new Promise((resolve) => setTimeout(resolve, 100));
+  while (Date.now() - started < LOGIN_TIMEOUT_MS) {
+    loadSession();
+    if (validAccess()) {
+      await discoverProjectId();
+      log('DealDesk sign-in is ready.');
+      return session.accessToken;
+    }
+    if (!loggedUrl) {
+      try {
+        const url = fs.readFileSync(URL_PATH, 'utf8').trim();
+        if (url) {
+          log(`Sign in at: ${url}`);
+          loggedUrl = true;
+        }
+      } catch (err) { /* page not ready yet */ }
+    }
+    let errorText = '';
+    try { errorText = fs.readFileSync(ERROR_PATH, 'utf8').trim(); } catch (err) { /* still signing in */ }
+    if (errorText && !readLock()) throw new Error(errorText);
+    await new Promise((resolve) => setTimeout(resolve, 400));
   }
-  if (validAccess()) return session.accessToken;
-  if (lastLoginError && !loginPromise) throw lastLoginError;
-  const err = new Error(pendingMessage());
-  err.oauthPending = true;
-  throw err;
+  throw new Error('DealDesk sign-in timed out. Finish the agenthouse page, then try again.');
 }
 
 function postMcp(messages, token) {
@@ -622,6 +690,10 @@ async function handleLine(line) {
 }
 
 function main() {
+  if (process.argv.includes('--login')) {
+    loginMain().then(() => process.exit(process.exitCode || 0));
+    return;
+  }
   const rl = readline.createInterface({ input: process.stdin, crlfDelay: Infinity });
   rl.on('line', (line) => {
     handleLine(line).catch((err) => log(String(err && err.message || err)));

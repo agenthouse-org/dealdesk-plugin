@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="DealDesk">
   <title>DealDesk</title>
-  <rect x="0.5" y="0.5" width="127" height="127" rx="27.5" fill="#090B09" stroke="#1B201B"/>
+  <rect width="128" height="128" rx="28" fill="#090B09"/>
   <path fill="#F0F0F0" fill-rule="evenodd" d="
     M36 28 H64 A36 36 0 0 1 64 100 H36 A4 4 0 0 1 32 96 V32 A4 4 0 0 1 36 28 Z
     M46 42 H64 A22 22 0 0 1 64 86 H46 Z"/>

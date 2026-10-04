@@ -23,7 +23,18 @@ for (const dir of dirs) {
     failed += 1;
     continue;
   }
+  if (!/^dealdesk-[a-z0-9-]{1,54}$/.test(dir.name)) {
+    rows.push({ skill: dir.name, ok: false, reason: 'folder must be dealdesk-<name>' });
+    failed += 1;
+    continue;
+  }
   const text = fs.readFileSync(skillPath, 'utf8');
+  const name = (text.match(/^name:\s*(.+)\s*$/m) || [])[1];
+  if (name !== dir.name) {
+    rows.push({ skill: dir.name, ok: false, reason: `frontmatter name ${name || '(missing)'} != folder` });
+    failed += 1;
+    continue;
+  }
   const lines = text.split(/\r?\n/).length;
   const hasContents = /^## Contents\s*$/m.test(text);
   const ok = lines <= 100 || hasContents;

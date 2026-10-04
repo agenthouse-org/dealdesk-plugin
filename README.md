@@ -104,7 +104,7 @@ You should see DealDesk tools available (such as listing cards or creating a quo
 
 ## Skills and slash commands
 
-Guided skills live in [`skills/`](./skills/). Matching slash commands live in [`commands/`](./commands/): `/dealdesk-help`, `/create-card`, `/log-email`, `/craft-quote`, `/quote`, `/evaluate`, `/directory-activity`, `/find-customer`, `/share-quote`, `/export`, `/publish`. Start with `/dealdesk-help` for an overview (the agent should call `dealdesk.list_skills` / `dealdesk.discover`). A host may prefix commands with the plugin name (for example `/dealdesk:log-email`).
+Guided skills live in [`skills/`](./skills/). Matching slash commands live in [`commands/`](./commands/): `/dealdesk-help`, `/dealdesk-create-card`, `/dealdesk-log-card-activity`, `/dealdesk-craft-quote`, `/dealdesk-quote-from-portfolio`, `/dealdesk-evaluate-configuration`, `/dealdesk-directory-activity`, `/dealdesk-find-or-create-customer`, `/dealdesk-share-quote`, `/dealdesk-export-analysis`, `/dealdesk-publish-portfolio`. Start with `/dealdesk-help` for an overview (the agent should call `dealdesk.list_skills` / `dealdesk.discover`). A host may prefix commands with the plugin name (for example `/dealdesk:dealdesk-log-card-activity`).
 
 ## Support
 

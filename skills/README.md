@@ -15,16 +15,16 @@ These notes describe common workflows the DealDesk MCP connector supports. Hosts
 | Skill | Slash command | Purpose |
 | --- | --- | --- |
 | [dealdesk-help](./dealdesk-help/SKILL.md) | `/dealdesk-help` | Overview of capabilities; agent calls `list_skills` / `discover` |
-| [create-card](./create-card/SKILL.md) | `/create-card` | Create or update a desk card |
-| [log-card-activity](./log-card-activity/SKILL.md) | `/log-email` | Notes, comments, tasks, and email touchpoints |
-| [craft-quote](./craft-quote/SKILL.md) | `/craft-quote` | Craft or refine a classic quote |
-| [quote-from-portfolio](./quote-from-portfolio/SKILL.md) | `/quote` | Evaluate and create a quote from the published portfolio |
-| [evaluate-configuration](./evaluate-configuration/SKILL.md) | `/evaluate` | Side-effect free CPQ evaluation |
-| [directory-activity](./directory-activity/SKILL.md) | `/directory-activity` | Company/contact notes and commercial summary |
-| [find-or-create-customer](./find-or-create-customer/SKILL.md) | `/find-customer` | Directory company/contact lookup and create |
-| [share-quote](./share-quote/SKILL.md) | `/share-quote` | Quote status and customer share links (classic + rich) |
-| [manage-cases](./manage-cases/SKILL.md) | — | Local DealDesk cases |
-| [manage-orders](./manage-orders/SKILL.md) | — | Orders (discover `orders`) |
-| [portfolio-browse](./portfolio-browse/SKILL.md) | — | Portfolio articles/revisions (discover `portfolio`) |
-| [export-analysis](./export-analysis/SKILL.md) | `/export` | Bounded Deal Intelligence export |
-| [publish-portfolio](./publish-portfolio/SKILL.md) | `/publish` | Preview then confirm portfolio publish |
+| [dealdesk-create-card](./dealdesk-create-card/SKILL.md) | `/dealdesk-create-card` | Create or update a desk card |
+| [dealdesk-log-card-activity](./dealdesk-log-card-activity/SKILL.md) | `/dealdesk-log-card-activity` | Notes, comments, tasks, and email touchpoints |
+| [dealdesk-craft-quote](./dealdesk-craft-quote/SKILL.md) | `/dealdesk-craft-quote` | Craft or refine a classic quote |
+| [dealdesk-quote-from-portfolio](./dealdesk-quote-from-portfolio/SKILL.md) | `/dealdesk-quote-from-portfolio` | Evaluate and create a quote from the published portfolio |
+| [dealdesk-evaluate-configuration](./dealdesk-evaluate-configuration/SKILL.md) | `/dealdesk-evaluate-configuration` | Side-effect free CPQ evaluation |
+| [dealdesk-directory-activity](./dealdesk-directory-activity/SKILL.md) | `/dealdesk-directory-activity` | Company/contact notes and commercial summary |
+| [dealdesk-find-or-create-customer](./dealdesk-find-or-create-customer/SKILL.md) | `/dealdesk-find-or-create-customer` | Directory company/contact lookup and create |
+| [dealdesk-share-quote](./dealdesk-share-quote/SKILL.md) | `/dealdesk-share-quote` | Quote status and customer share links (classic + rich) |
+| [dealdesk-manage-cases](./dealdesk-manage-cases/SKILL.md) | — | Local DealDesk cases |
+| [dealdesk-manage-orders](./dealdesk-manage-orders/SKILL.md) | — | Orders (discover `orders`) |
+| [dealdesk-portfolio-browse](./dealdesk-portfolio-browse/SKILL.md) | — | Portfolio articles/revisions (discover `portfolio`) |
+| [dealdesk-export-analysis](./dealdesk-export-analysis/SKILL.md) | `/dealdesk-export-analysis` | Bounded Deal Intelligence export |
+| [dealdesk-publish-portfolio](./dealdesk-publish-portfolio/SKILL.md) | `/dealdesk-publish-portfolio` | Preview then confirm portfolio publish |

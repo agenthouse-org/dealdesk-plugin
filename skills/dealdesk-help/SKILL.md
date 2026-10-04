@@ -20,22 +20,22 @@ If MCP is not connected yet, still explain the command map and say which auth pa
 | Command | What it does |
 | --- | --- |
 | `/dealdesk-help` | This overview |
-| `/create-card` | Create or update a desk card (including company/contact link) |
-| `/log-email` | Log inbound or outbound email on a card timeline |
-| `/craft-quote` | Craft or refine a classic quote (clone or fresh draft) |
-| `/quote` | Evaluate a configuration and create a quote from the portfolio |
-| `/evaluate` | Evaluate a configuration without creating a quote |
-| `/directory-activity` | Company/contact commercial summary and notes |
-| `/find-customer` | Find or create a company or contact |
-| `/share-quote` | Quote status and customer share links (classic + rich) |
-| `/export` | Bounded Deal Intelligence export |
-| `/publish` | Preview then confirm portfolio publish |
+| `/dealdesk-create-card` | Create or update a desk card (including company/contact link) |
+| `/dealdesk-log-card-activity` | Log inbound or outbound email on a card timeline |
+| `/dealdesk-craft-quote` | Craft or refine a classic quote (clone or fresh draft) |
+| `/dealdesk-quote-from-portfolio` | Evaluate a configuration and create a quote from the portfolio |
+| `/dealdesk-evaluate-configuration` | Evaluate a configuration without creating a quote |
+| `/dealdesk-directory-activity` | Company/contact commercial summary and notes |
+| `/dealdesk-find-or-create-customer` | Find or create a company or contact |
+| `/dealdesk-share-quote` | Quote status and customer share links (classic + rich) |
+| `/dealdesk-export-analysis` | Bounded Deal Intelligence export |
+| `/dealdesk-publish-portfolio` | Preview then confirm portfolio publish |
 
 Hosts may prefix commands with the plugin name (for example `/dealdesk:dealdesk-help`).
 
 ## Status updates and email
 
-- Email: use `dealdesk.log_email` (or `/log-email`). Never put email in `add_card_note`.
+- Email: use `dealdesk.log_email` (or `/dealdesk-log-card-activity`). Never put email in `add_card_note`.
 - Other timeline work: use `dealdesk.create_status_update` for `comment`, `task`, and touchpoints (`phone_call`, `meeting`, `email_incoming`, `email_outgoing`, `misc`).
 - Read the timeline with `dealdesk.list_status_updates`. Update with `dealdesk.patch_status_update`.
 - Structured desk notes: `dealdesk.add_card_note` / `dealdesk.patch_card_note`.
@@ -51,7 +51,7 @@ Hosts may prefix commands with the plugin name (for example `/dealdesk:dealdesk-
 - Delete is not available through MCP. Soft-close cards by changing stage; soft-close shares with `isOpen=false`.
 - Portfolio publish needs preview, then `portfolio_publish` with `confirm=true`.
 - Do not invent prices. Prefer portfolio evaluation and published revision ids.
-- Prefer `/export` over paging through large lists forever.
+- Prefer `/dealdesk-export-analysis` over paging through large lists forever.
 - Skill-gated tools need `dealdesk.discover` with the matching domain first (for example `orders`, `portfolio`, `portfolio-authoring`).
 - Remind the user that DealDesk tool results may disclose customer data to the AI host and other tools in the conversation, and that they remain responsible for that data.
 

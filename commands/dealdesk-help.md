@@ -57,5 +57,6 @@ Hosts may prefix commands with the plugin name (for example `/dealdesk:dealdesk-
 
 ## Auth
 
-- Remote hosts (ChatGPT / Claude Connect): OAuth against `https://api.agenthouse.org/mcp/dealdesk`.
-- Local hosts (Cursor and similar): project API key with at least `dealdesk:read`, or `dealdesk:access` for writes, plus `AGENTHOUSE_PROJECT_ID`.
+- Sign-in is OAuth. The user signs in on the agenthouse page, chooses the project, and grants DealDesk access.
+- Remote URL: `https://api.agenthouse.org/mcp/dealdesk` (ChatGPT, Claude, Codex, Cursor).
+- The Cursor plugin and the local connector open that same page. An API key is only for automation that cannot open a browser (`AGENTHOUSE_API_KEY`, and `AGENTHOUSE_PROJECT_ID` when the account has more than one project).

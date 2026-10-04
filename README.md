@@ -28,37 +28,45 @@ Destructive delete operations are not available. Soft-close cards by updating th
 
 ## Before you start
 
-You need:
+You need an **agenthouse** account with DealDesk on your project.
 
-1. An **agenthouse** account with DealDesk access to your tenant  
-2. Either:
-   - **Connect (recommended for ChatGPT / Claude remote):** sign in and grant DealDesk access when prompted, or  
-   - **A project API key** (for Cursor, Claude Desktop, Codex, and other local hosts): create one under **Access management → API keys** in the agenthouse workspace. Grant at least `dealdesk:read`, or `dealdesk:access` for full write access.
+Sign-in is **Connect (OAuth)**. A browser opens the agenthouse page; you sign in, select one or more projects, and grant DealDesk access. There is no API key to copy. If you authorize one project, tools use that project. If you authorize several, pass `projectId` on each tool call.
 
-You also need **Node.js 20+** for the local connector.
+Use a project API key only for automation that cannot open a browser. Create one under **Access management → API keys** (`dealdesk:read`, or `dealdesk:access` for writes).
+
+The local connector needs **Node.js 20+**.
 
 ## Install
 
-### Option A — Remote MCP (ChatGPT, Claude, and similar)
+### Connect — ChatGPT, Claude, Codex, Cursor
 
-Add DealDesk as a remote MCP server / connector (or install the plugin from the host marketplace when listed):
+Install **DealDesk** from the host marketplace, or add a remote MCP server:
 
 | Setting | Value |
 | --- | --- |
 | MCP URL | `https://api.agenthouse.org/mcp/dealdesk` |
 | Authentication | OAuth (Connect) |
 
-When Connect opens, sign in with agenthouse, choose your project (tenant), and grant DealDesk access. Your host will then list DealDesk tools automatically.
+The Cursor plugin opens that same sign-in page after install. Nothing to paste.
 
-### Option B — Local connector (Cursor, Claude Desktop, Codex)
+### Local connector
 
-Use this package as a local stdio MCP bridge. It talks securely to agenthouse with your project API key.
+Hosts that only accept a local command use this package. On first launch it opens the same Connect page and remembers the sign-in on this computer.
 
-#### Cursor
+```json
+{
+  "mcpServers": {
+    "dealdesk": {
+      "command": "npx",
+      "args": ["-y", "github:agenthouse-org/dealdesk-plugin"]
+    }
+  }
+}
+```
 
-1. Open **Cursor Settings → MCP**  
-2. Add a server with the configuration below  
-3. Restart MCP / reload the window if prompted  
+Claude Desktop uses the same block in `claude_desktop_config.json`.
+
+### API key (automation only)
 
 ```json
 {
@@ -76,23 +84,13 @@ Use this package as a local stdio MCP bridge. It talks securely to agenthouse wi
 }
 ```
 
-#### Claude Desktop
-
-Edit your Claude Desktop MCP config (typically `claude_desktop_config.json`) and add the same `mcpServers.dealdesk` block as above, then restart Claude Desktop.
-
-#### Codex / other stdio hosts
-
-Use the same command, arguments, and environment variables as Cursor.
-
-#### Environment variables
-
 | Variable | Required | Description |
 | --- | --- | --- |
-| `AGENTHOUSE_API_KEY` | Yes | Project API key from agenthouse Access management |
-| `AGENTHOUSE_PROJECT_ID` | Recommended | Default tenant id when a tool call omits `projectId` |
+| `AGENTHOUSE_API_KEY` | For this path | Project API key from agenthouse Access management |
+| `AGENTHOUSE_PROJECT_ID` | When you authorize several projects | Tenant id used when a tool call omits `projectId` |
 | `AGENTHOUSE_API_URL` | No | Defaults to `https://api.agenthouse.org` |
 
-Keep your API key private. Do not commit it to git or share it in chat logs.
+Keep the API key private. Do not commit it or paste it into chat.
 
 ### Verify the connection
 
@@ -100,7 +98,7 @@ After install, ask your assistant something concrete, for example:
 
 > List open DealDesk cards for my project.
 
-You should see DealDesk tools available (such as listing cards or creating a quote from a configuration). If authentication fails, renew Connect or check that the API key has DealDesk permission for that tenant.
+You should see DealDesk tools available (such as listing cards or creating a quote from a configuration). If sign-in did not finish, complete the agenthouse page and ask again. For an API key, check that it has DealDesk permission for that project.
 
 ## Skills and slash commands
 

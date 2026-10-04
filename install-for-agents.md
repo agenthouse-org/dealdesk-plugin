@@ -37,26 +37,26 @@ Tools always run on agenthouse MCP (`POST /mcp/dealdesk`). The plugin adds skill
 
 1. **Which host?** ChatGPT (web/desktop Work), Claude.ai, Claude Code, Cursor, Claude Desktop, Codex, or other.
 2. Do they already have an **agenthouse** account with **DealDesk** on a tenant?
-3. Prefer **Connect / OAuth** (cloud hosts) or a **project API key** (local stdio hosts)?
 
-Do **not** ask them to paste a full API key into chat if avoidable. Prefer: they create the key in the UI and paste it into the host’s secret/env field themselves. If they paste a key in chat, warn them to rotate it after setup.
+OAuth is the path for every interactive host. Do **not** ask them to create or paste an API key unless they are setting up automation that cannot open a browser. If they paste a key in chat, warn them to rotate it after setup.
 
 ---
 
 ## Decision tree
 
 ```
-Cloud host with Connect/OAuth (ChatGPT, Claude.ai, many remote MCP UIs)
-  → Path A — Remote MCP URL
-
-Local / stdio host (Cursor MCP settings, Claude Desktop, Codex stdio, npx)
-  → Path B — Local bridge + project API key
+Interactive host (ChatGPT, Claude, Codex, Cursor, Claude Desktop)
+  → OAuth. Path A when the host can add a remote URL. Path B when it needs a local command.
+    The Cursor plugin is Path B: install it, and the connector opens the sign-in page.
 
 Host plugin marketplace already lists “DealDesk” / agenthouse
-  → Path C — Install from marketplace, then complete Connect or API key as the host prompts
+  → Path C — Install from marketplace, then complete the agenthouse sign-in page
+
+Automation that cannot open a browser (CI)
+  → Path D — API key
 ```
 
-If unsure, detect from context (e.g. Cursor → Path B; ChatGPT Work plugins → Path A or C).
+If unsure, use OAuth. Do not start with an API key.
 
 ---
 
@@ -70,27 +70,55 @@ If unsure, detect from context (e.g. Cursor → Path B; ChatGPT Work plugins →
    | URL | `https://api.agenthouse.org/mcp/dealdesk` |
    | Auth | OAuth / Connect |
 
-3. Complete sign-in on agenthouse, pick the **project (tenant)**, grant DealDesk access (`dealdesk:read` / `write` / `access` as offered).
+3. Complete sign-in on agenthouse, select **one or more DealDesk projects**, grant DealDesk access (`dealdesk:read` / `write` / `access` as offered). If several projects are authorized, later tool calls must pass `projectId`.
 4. Confirm tools appear (card list/create, or at least `dealdesk.list_cards`).
 5. Run **Verify** below.
 
-Do not configure `npx` or API keys for Path A unless the host requires a fallback.
+Do not configure `npx` or API keys for Path A unless the host cannot complete Connect. On Cursor, prefer the DealDesk plugin (Path B): it opens the sign-in page itself. A remote URL is enough only when that Cursor window actually opens the Connect page.
 
 ---
 
-## Path B — Local stdio bridge (API key)
+## Path B — Local connector (OAuth)
+
+Use this when the host runs a local command (Cursor plugin, Claude Desktop, `npx`) and should still sign in through the browser.
 
 ### Prerequisites
 
 - Node.js **20+** on the machine that runs the host.
+- A browser the user can sign in with.
+
+### Cursor plugin
+
+Install the DealDesk plugin. It starts the local connector, which opens the agenthouse sign-in page. The user signs in, selects one or more projects, and grants access. Do not ask for an API key. Ask for a project id only after they authorize several projects and a tool call needs `projectId`.
+
+### Manual local command
+
+```json
+{
+  "mcpServers": {
+    "dealdesk": {
+      "command": "npx",
+      "args": ["-y", "github:agenthouse-org/dealdesk-plugin"]
+    }
+  }
+}
+```
+
+Claude Desktop uses that same block in `claude_desktop_config.json`, then restart Claude Desktop.
+
+On first launch the connector opens the Connect page and stores the sign-in for this computer. Later launches reuse it. Run **Verify** after they finish the page.
+
+---
+
+## Path D — API key (automation only)
+
+Use this only when no browser can open (CI, a headless worker).
+
 - Project API key from agenthouse **Access management → API keys**.
-- Key permissions: at least `dealdesk:read`; for writes use `dealdesk:access` (or write as documented in their workspace).
-- They know their **project id** (tenant id).
+- Key permissions: at least `dealdesk:read`; for writes use `dealdesk:access`.
+- `AGENTHOUSE_PROJECT_ID` when the account has more than one project.
 
-### Cursor
-
-1. Open **Cursor Settings → MCP**.
-2. Add (or merge) this server — they fill in secrets themselves:
+They fill in secrets in the host’s env field. Do not ask them to paste the key into chat.
 
 ```json
 {
@@ -108,23 +136,10 @@ Do not configure `npx` or API keys for Path A unless the host requires a fallbac
 }
 ```
 
-3. Save, reload MCP / window if prompted.
-4. Run **Verify**.
-
-### Claude Desktop
-
-Same `mcpServers.dealdesk` block in `claude_desktop_config.json`, then restart Claude Desktop.
-
-### Codex / other stdio hosts
-
-Same command, args, and env vars as Cursor.
-
-### Environment variables
-
 | Variable | Required | Meaning |
 | --- | --- | --- |
-| `AGENTHOUSE_API_KEY` | Yes | Project API key (`ahk_…` in production; `local_…` only against a local API) |
-| `AGENTHOUSE_PROJECT_ID` | Recommended | Default tenant when a tool omits `projectId` |
+| `AGENTHOUSE_API_KEY` | Yes, on this path | Project API key (`ahk_…` in production; `local_…` only against a local API) |
+| `AGENTHOUSE_PROJECT_ID` | When several projects exist | Tenant when a tool omits `projectId` |
 | `AGENTHOUSE_API_URL` | No | Default `https://api.agenthouse.org` |
 
 For a **local** agenthouse API, set `AGENTHOUSE_API_URL` to that base URL (no trailing slash) and use a `local_…` key if that is what their environment issues.
@@ -136,7 +151,7 @@ For a **local** agenthouse API, set `AGENTHOUSE_API_URL` to that base URL (no tr
 When the host can install from a marketplace or this Git repo:
 
 1. Install / enable the **DealDesk** plugin from agenthouse (repo: `agenthouse-org/dealdesk-plugin`).
-2. Complete whatever Connect or API-key prompt the host shows (same credentials rules as A/B).
+2. Complete the agenthouse sign-in page (same Connect flow as Path A and Path B). Use Path D only when the host cannot open a browser.
 3. Run **Verify**.
 
 Exact marketplace UI labels differ by host. Prefer the host’s documented plugin install flow; fall back to Path A or B if listing is unavailable.
@@ -174,9 +189,10 @@ Expect names such as `dealdesk.list_cards`, `dealdesk.create_card`, `dealdesk.lo
 
 | Symptom | What to check |
 | --- | --- |
-| Unauthorized / invalid token | Wrong key, revoked key, or `ahk_` key aimed at a local API (or the reverse). Renew Connect or create a new key. |
-| Forbidden / DealDesk denied | Key or OAuth grant missing `dealdesk:read` / write / access for that project. |
-| Wrong project / empty data | `AGENTHOUSE_PROJECT_ID` or Connect project picker does not match the tenant they expect. |
+| Sign-in page did not open | The connector logs the page address. Ask them to open it, finish Connect, then retry. On Cursor, prefer the DealDesk plugin (it opens the page itself) over a remote URL whose browser redirect never appears. |
+| Unauthorized / invalid token | Saved sign-in expired, or an API key was revoked or aimed at the wrong API. Sign in again, or replace the key. |
+| Forbidden / DealDesk denied | OAuth grant or API key is missing DealDesk access for that project. |
+| Wrong project / empty data | The project chosen on the Connect page, or `AGENTHOUSE_PROJECT_ID`, is a different tenant. |
 | `npx` / Node errors | Node 20+ installed; network allows GitHub/`npx`. |
 | Tools missing | Reload MCP; confirm remote URL is exactly `https://api.agenthouse.org/mcp/dealdesk`. |
 | Email “saved” as a note | Re-teach: use `dealdesk.log_email`, not `add_card_note`. |

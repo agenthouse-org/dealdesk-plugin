@@ -19,7 +19,7 @@ Log inbound or outbound email with `dealdesk.log_email`:
 - `from` / `to` / `subject` / `text`
 - `cardId` of the desk card
 
-This creates a status-update **touchpoint** (`email_incoming` / `email_outgoing`) on the card timeline — the same surface the DealDesk UI uses.
+This creates a status-update **touchpoint** (`email_incoming` / `email_outgoing`) on the card timeline — the same surface the DealDesk UI uses. The server persists structured `from` and `to` fields (and a compatible `participants` string `from → to`). Prefer `dealdesk.log_email` over a generic touchpoint so those fields are set correctly.
 
 **Never** put email logs into `add_card_note`.
 
@@ -29,8 +29,8 @@ Use `dealdesk.create_status_update` for:
 
 - `type: comment` — timeline comment (`body` required)
 - `type: task` — task (`title` required; optional due date / assignee)
-- `type: touchpoint` — `phone_call`, `meeting`, `email_incoming`, `email_outgoing`, or `misc`
+- `type: touchpoint` — `phone_call`, `meeting`, `email_incoming`, `email_outgoing`, or `misc` (for email, prefer `dealdesk.log_email` so `from` / `to` are persisted)
 
 List existing timeline entries with `dealdesk.list_status_updates` (`entityType: desk-card` + `cardId` / `entityId`).
 
-Update an existing entry with `dealdesk.patch_status_update` (comment body, task status/fields, or touchpoint fields). Prefer listing first for `statusUpdateId` and `updatedAt`.
+Update an existing entry with `dealdesk.patch_status_update` (comment body, task status/fields, or touchpoint fields including `from` / `to`). Prefer listing first for `statusUpdateId` and `updatedAt`.

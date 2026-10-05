@@ -51,7 +51,7 @@ The Cursor plugin opens that same sign-in page after install. Nothing to paste.
 
 ### Plugin package
 
-Each GitHub release attaches `dealdesk-plugin-<version>.zip`. That archive is the plugin itself: skills, commands, the local connector, and the ChatGPT, Claude, Cursor, and Codex manifests. It points at the same MCP URL. Sign-in is still Connect. ChatGPT can take this ZIP under **Plugins → Upload plugin**. Other hosts install the same archive, or the `dealdesk-plugin` npm package.
+Each GitHub release attaches `dealdesk-plugin-x.y.z.zip`. That archive is the plugin itself: skills, commands, the local connector, and the ChatGPT, Claude, Cursor, and Codex manifests. It points at the same MCP URL. Sign-in is still Connect. ChatGPT can take this ZIP under **Plugins → Upload plugin**. Other hosts install the same archive, or the `dealdesk-plugin` npm package.
 
 Commit the version in this repo, then publish a GitHub Release tagged `vX.Y.Z` (the tag must match `package.json`, for example `v0.1.0`). The **Publish to npm** workflow publishes `dealdesk-plugin` and attaches that plugin ZIP to the release. A prerelease is published to the npm `next` tag. A manual run of the workflow only checks the package.
 

@@ -53,7 +53,7 @@ Host plugin marketplace already lists “DealDesk” / agenthouse
   → Path C — Install from marketplace, then complete the agenthouse sign-in page
 
 Host can install a plugin ZIP (ChatGPT upload, or a local plugin folder)
-  → Path E — Download dealdesk-plugin-<version>.zip from GitHub Releases, then Connect
+  → Path E — Download dealdesk-plugin-x.y.z.zip from GitHub Releases, then Connect
 
 Automation that cannot open a browser (CI)
   → Path D — API key
@@ -165,12 +165,12 @@ Exact marketplace UI labels differ by host. Prefer the host’s documented plugi
 
 Use this when the host installs a plugin package. The same ZIP is for ChatGPT, Claude, Cursor, and Codex. It is not a zip of the git repository.
 
-1. Download `dealdesk-plugin-<version>.zip` from the latest release: https://github.com/agenthouse-org/dealdesk-plugin/releases
+1. Download `dealdesk-plugin-x.y.z.zip` from the latest release: https://github.com/agenthouse-org/dealdesk-plugin/releases
 2. ChatGPT: **Plugins → Upload plugin**. Other hosts: install that ZIP, or unpack it and install the plugin folder, using the host’s plugin flow.
 3. Complete Connect on agenthouse for `https://api.agenthouse.org/mcp/dealdesk`.
 4. Run **Verify**.
 
-Publishing a GitHub Release tagged `vX.Y.Z` publishes `dealdesk-plugin` to npm and attaches that ZIP. Do not invent a local zip from the working tree unless you just ran `npm run package:zip` and are handing them `dist/dealdesk-plugin-<version>.zip`. Local command installs use `npx -y dealdesk-plugin`.
+Publishing a GitHub Release tagged `vX.Y.Z` publishes `dealdesk-plugin` to npm and attaches that ZIP. Do not invent a local zip from the working tree unless you just ran `npm run package:zip` and are handing them `dist/dealdesk-plugin-x.y.z.zip`. Local command installs use `npx -y dealdesk-plugin`.
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "name": "dealdesk",
   "displayName": "DealDesk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DealDesk skills and slash commands. Install opens the agenthouse sign-in page so you can choose a project and grant access.",
   "author": {
     "name": "agenthouse",

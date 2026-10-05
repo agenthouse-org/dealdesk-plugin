@@ -1,7 +1,7 @@
 {
   "name": "dealdesk-plugin",
-  "version": "0.1.0",
-  "description": "DealDesk plugin for agenthouse — marketplace-installable skills and MCP tools for ChatGPT, Claude, Cursor, and Codex",
+  "version": "0.1.1",
+  "description": "DealDesk for ChatGPT, Claude, Cursor, and Codex. Desk cards, quotes, customers, and portfolio on agenthouse.",
   "license": "MIT",
   "homepage": "https://github.com/agenthouse-org/dealdesk-plugin",
   "repository": {

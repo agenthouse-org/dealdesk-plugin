@@ -101,6 +101,14 @@ async function requestJson(targetUrl, options) {
 function pickProjectId(data, depth) {
   if (!data || typeof data !== 'object' || (depth || 0) > 5) return {};
   if (!Array.isArray(data)) {
+    const listed = Array.isArray(data.projectIds)
+      ? data.projectIds
+      : (Array.isArray(data.project_ids) ? data.project_ids : null);
+    if (Array.isArray(listed)) {
+      const ids = listed.map((value) => String(value || '').trim()).filter(Boolean);
+      if (ids.length > 1) return { ambiguous: true, ids };
+      if (ids.length === 1) return { id: ids[0] };
+    }
     for (const key of ['projectId', 'project_id', 'tenantId', 'tenant_id', 'currentProjectId']) {
       if (typeof data[key] === 'string' && data[key].trim()) return { id: data[key].trim() };
     }
@@ -187,9 +195,11 @@ function applyTokenResponse(body) {
   const expiresIn = Number(body.expires_in);
   session.expiresAt = Date.now() + ((Number.isFinite(expiresIn) && expiresIn > 0 ? expiresIn : 3600) * 1000);
   const picked = pickProjectId(body);
-  if (picked.id && !PROJECT_ID) session.projectId = picked.id;
   const fromJwt = projectFromAccessToken(session.accessToken);
-  if (fromJwt.id && !PROJECT_ID) session.projectId = fromJwt.id;
+  if (!PROJECT_ID) {
+    if (picked.ambiguous || fromJwt.ambiguous) session.projectId = '';
+    else session.projectId = picked.id || fromJwt.id || session.projectId || '';
+  }
   persistSession();
 }
 

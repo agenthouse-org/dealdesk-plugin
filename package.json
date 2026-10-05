@@ -49,6 +49,6 @@
   },
   "scripts": {
     "start": "node bin/dealdesk-plugin.js",
-    "test": "node scripts/validate-skills.js"
+    "test": "node scripts/validate-skills.js && node scripts/test-project-scope.js"
   }
 }

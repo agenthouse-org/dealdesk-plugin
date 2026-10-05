@@ -9,9 +9,10 @@ Help the user use DealDesk. Prefer live discovery over memory.
 
 ## First steps
 
-1. Call `dealdesk.list_skills` and summarize the returned skills in plain language.
-2. If important tools are missing from the current tool list, call `dealdesk.discover` (omit `domain` for the domain list, or pass a domain such as `desk`, `quotes`, `portfolio`, `directory`, `export`, or `portfolio-authoring`).
-3. Then answer with the command map below and the live skill list.
+1. Call `dealdesk.list_projects` and tell the user which `authorizedProjectIds` the token covers. Do not assume the singular `projectId` when more than one id is listed.
+2. Call `dealdesk.list_skills` and summarize the returned skills in plain language.
+3. If important tools are missing from the current tool list, call `dealdesk.discover` (omit `domain` for the domain list, or pass a domain such as `desk`, `quotes`, `portfolio`, `directory`, `export`, or `portfolio-authoring`).
+4. Then answer with the command map below and the live skill list.
 
 If MCP is not connected yet, still explain the command map and say which auth path to use.
 
@@ -57,6 +58,6 @@ Hosts may prefix commands with the plugin name (for example `/dealdesk:dealdesk-
 
 ## Auth
 
-- Sign-in is OAuth. The user signs in on the agenthouse page, chooses the project, and grants DealDesk access.
+- Sign-in is OAuth. The user signs in on the agenthouse page, chooses one or more projects, and grants DealDesk access. When several projects are authorized, pass `projectId` on scoped tools.
 - Remote URL: `https://api.agenthouse.org/mcp/dealdesk` (ChatGPT, Claude, Codex, Cursor).
 - The Cursor plugin and the local connector open that same page. An API key is only for automation that cannot open a browser (`AGENTHOUSE_API_KEY`, and `AGENTHOUSE_PROJECT_ID` when the account has more than one project).

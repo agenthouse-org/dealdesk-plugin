@@ -1,7 +1,6 @@
 {
-  "name": "@agenthouse-org/dealdesk-plugin",
+  "name": "dealdesk-plugin",
   "version": "0.1.0",
-  "private": true,
   "description": "DealDesk plugin for agenthouse — marketplace-installable skills and MCP tools for ChatGPT, Claude, Cursor, and Codex",
   "license": "MIT",
   "homepage": "https://github.com/agenthouse-org/dealdesk-plugin",
@@ -47,8 +46,14 @@
   "engines": {
     "node": ">=20"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "start": "node bin/dealdesk-plugin.js",
-    "test": "node scripts/validate-skills.js && node scripts/test-project-scope.js"
+    "test": "node scripts/validate-skills.js && node scripts/test-project-scope.js && node scripts/package-plugin-zip.js",
+    "package:zip": "node scripts/package-plugin-zip.js",
+    "version:bump": "node scripts/bump-version.js"
   }
 }

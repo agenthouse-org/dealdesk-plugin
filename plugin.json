@@ -16,7 +16,9 @@
     "com.openai": {
       "interface": {
         "displayName": "DealDesk",
-        "shortDescription": "Desk cards, quotes, customers, and portfolio publish on agenthouse.",
+        "shortDescription": "Desk cards, quotes, customers",
+        "logo": "./assets/logo.svg",
+        "composerIcon": "./assets/logo.svg",
         "longDescription": "Operate DealDesk from ChatGPT or Codex: create and update desk cards, log email on the card timeline, evaluate configurations, create quotes from the published portfolio, find or create customers, export for analysis, and publish a portfolio only after preview and confirm. Tools run on the agenthouse MCP endpoint. Delete is not available.",
         "developerName": "agenthouse",
         "category": "Productivity",

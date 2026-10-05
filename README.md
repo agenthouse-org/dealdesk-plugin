@@ -49,6 +49,16 @@ Install **DealDesk** from the host marketplace, or add a remote MCP server:
 
 The Cursor plugin opens that same sign-in page after install. Nothing to paste.
 
+### Plugin package
+
+Each GitHub release attaches `dealdesk-plugin-<version>.zip`. That archive is the plugin itself: skills, commands, the local connector, and the ChatGPT, Claude, Cursor, and Codex manifests. It points at the same MCP URL. Sign-in is still Connect. ChatGPT can take this ZIP under **Plugins → Upload plugin**. Other hosts install the same archive, or the `dealdesk-plugin` npm package.
+
+Commit the version in this repo, then publish a GitHub Release tagged `vX.Y.Z` (the tag must match `package.json`, for example `v0.1.0`). The **Publish to npm** workflow publishes `dealdesk-plugin` and attaches that plugin ZIP to the release. A prerelease is published to the npm `next` tag. A manual run of the workflow only checks the package.
+
+On npm, set the trusted publisher for `dealdesk-plugin` to GitHub Actions, repository `agenthouse-org/dealdesk-plugin`, workflow file `publish.yml`, and allow `npm publish`. The package has to exist before that publisher can be saved. No npm token is stored in GitHub.
+
+Directory review in the OpenAI portal also asks for a support URL, test cases, and a demo recording. Those are entered in the portal; they are not inside the ZIP.
+
 ### Local connector
 
 Hosts that only accept a local command use this package. On first launch it opens the same Connect page and remembers the sign-in on this computer.
@@ -58,7 +68,7 @@ Hosts that only accept a local command use this package. On first launch it open
   "mcpServers": {
     "dealdesk": {
       "command": "npx",
-      "args": ["-y", "github:agenthouse-org/dealdesk-plugin"]
+      "args": ["-y", "dealdesk-plugin"]
     }
   }
 }
@@ -73,7 +83,7 @@ Claude Desktop uses the same block in `claude_desktop_config.json`.
   "mcpServers": {
     "dealdesk": {
       "command": "npx",
-      "args": ["-y", "github:agenthouse-org/dealdesk-plugin"],
+      "args": ["-y", "dealdesk-plugin"],
       "env": {
         "AGENTHOUSE_API_URL": "https://api.agenthouse.org",
         "AGENTHOUSE_API_KEY": "ahk_your_project_api_key",

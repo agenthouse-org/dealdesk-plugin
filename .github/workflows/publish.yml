@@ -1,0 +1,75 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [published]
+  # Manual runs verify packaging without publishing a version.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.19.1 --ignore-scripts
+      - name: Validate release identity
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: node scripts/validate-npm-release.js
+      - name: Pack the plugin ZIP and the npm package
+        run: |
+          mkdir -p dist
+          node scripts/package-plugin-zip.js
+          npm pack --ignore-scripts --pack-destination dist
+          tar -tzf dist/*.tgz | grep -E 'package/bin/dealdesk-plugin.js|package/plugin.json|package/mcp.json'
+      - name: Keep the tested archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-package
+          path: |
+            dist/*.tgz
+            dist/*.zip
+          if-no-files-found: error
+      - name: Attest the plugin ZIP
+        if: github.event_name == 'release'
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: dist/*.zip
+      - name: Attach the plugin ZIP to the GitHub release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" dist/*.zip --repo "$GITHUB_REPOSITORY" --clobber
+      - name: Verify publishing command without publishing
+        if: github.event_name == 'workflow_dispatch'
+        # A manual run may use an already published version. Force bypasses
+        # that preflight only here; dry-run prevents registry mutation.
+        run: npm publish ./dist/*.tgz --access public --ignore-scripts --dry-run --force
+      - name: Publish release with trusted authentication
+        if: github.event_name == 'release'
+        env:
+          NPM_DIST_TAG: ${{ github.event.release.prerelease && 'next' || 'latest' }}
+        run: npm publish ./dist/*.tgz --access public --ignore-scripts --tag "$NPM_DIST_TAG"

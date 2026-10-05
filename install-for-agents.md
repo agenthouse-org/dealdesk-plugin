@@ -7,7 +7,7 @@ Read this file end to end before editing their machine. Do not invent URLs, pack
 | | |
 | --- | --- |
 | Plugin repo | https://github.com/agenthouse-org/dealdesk-plugin |
-| npm (when published) | `@agenthouse-org/dealdesk-plugin` |
+| npm | `dealdesk-plugin` |
 | Remote MCP URL | `https://api.agenthouse.org/mcp/dealdesk` |
 | Product | [agenthouse.org](https://agenthouse.org) |
 
@@ -51,6 +51,9 @@ Interactive host (ChatGPT, Claude, Codex, Cursor, Claude Desktop)
 
 Host plugin marketplace already lists “DealDesk” / agenthouse
   → Path C — Install from marketplace, then complete the agenthouse sign-in page
+
+Host can install a plugin ZIP (ChatGPT upload, or a local plugin folder)
+  → Path E — Download dealdesk-plugin-<version>.zip from GitHub Releases, then Connect
 
 Automation that cannot open a browser (CI)
   → Path D — API key
@@ -98,7 +101,7 @@ Install the DealDesk plugin. It starts the local connector, which opens the agen
   "mcpServers": {
     "dealdesk": {
       "command": "npx",
-      "args": ["-y", "github:agenthouse-org/dealdesk-plugin"]
+      "args": ["-y", "dealdesk-plugin"]
     }
   }
 }
@@ -125,7 +128,7 @@ They fill in secrets in the host’s env field. Do not ask them to paste the key
   "mcpServers": {
     "dealdesk": {
       "command": "npx",
-      "args": ["-y", "github:agenthouse-org/dealdesk-plugin"],
+      "args": ["-y", "dealdesk-plugin"],
       "env": {
         "AGENTHOUSE_API_URL": "https://api.agenthouse.org",
         "AGENTHOUSE_API_KEY": "ahk_YOUR_PROJECT_API_KEY",
@@ -155,6 +158,19 @@ When the host can install from a marketplace or this Git repo:
 3. Run **Verify**.
 
 Exact marketplace UI labels differ by host. Prefer the host’s documented plugin install flow; fall back to Path A or B if listing is unavailable.
+
+---
+
+## Path E — Plugin ZIP
+
+Use this when the host installs a plugin package. The same ZIP is for ChatGPT, Claude, Cursor, and Codex. It is not a zip of the git repository.
+
+1. Download `dealdesk-plugin-<version>.zip` from the latest release: https://github.com/agenthouse-org/dealdesk-plugin/releases
+2. ChatGPT: **Plugins → Upload plugin**. Other hosts: install that ZIP, or unpack it and install the plugin folder, using the host’s plugin flow.
+3. Complete Connect on agenthouse for `https://api.agenthouse.org/mcp/dealdesk`.
+4. Run **Verify**.
+
+Publishing a GitHub Release tagged `vX.Y.Z` publishes `dealdesk-plugin` to npm and attaches that ZIP. Do not invent a local zip from the working tree unless you just ran `npm run package:zip` and are handing them `dist/dealdesk-plugin-<version>.zip`. Local command installs use `npx -y dealdesk-plugin`.
 
 ---
 
@@ -194,7 +210,7 @@ Expect names such as `dealdesk.list_cards`, `dealdesk.create_card`, `dealdesk.lo
 | Unauthorized / invalid token | Saved sign-in expired, or an API key was revoked or aimed at the wrong API. Sign in again, or replace the key. |
 | Forbidden / DealDesk denied | OAuth grant or API key is missing DealDesk access for that project. |
 | Wrong project / empty data | The project chosen on the Connect page, or `AGENTHOUSE_PROJECT_ID`, is a different tenant. |
-| `npx` / Node errors | Node 20+ installed; network allows GitHub/`npx`. |
+| `npx` / Node errors | Node 20+ installed; network allows the npm registry. The package name is `dealdesk-plugin`. |
 | Tools missing | Reload MCP; confirm remote URL is exactly `https://api.agenthouse.org/mcp/dealdesk`. |
 | Email “saved” as a note | Re-teach: use `dealdesk.log_email`, not `add_card_note`. |
 

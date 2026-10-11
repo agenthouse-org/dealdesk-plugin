@@ -45,14 +45,25 @@ OAuth is the path for every interactive host. Do **not** ask them to create or p
 ## Decision tree
 
 ```
-Interactive host (ChatGPT, Claude, Codex, Cursor, Claude Desktop)
+ChatGPT (web, desktop, or mobile)
+  → OAuth. Plans do not share one menu. Ask what their screen shows, and describe only that control:
+      Sidebar Plugins lists DealDesk → Install plugin, then Connect (Path C)
+      Upload plugin is shown → Path E, then Connect
+        Often Admin console → the workspace → Plugins → Add. Upload needs permission
+        (workspace owner, administrator, or a role with upload access).
+      Add custom MCP server / Create an MCP app is shown → Path A
+        Developer mode may need to be on first. Where that toggle sits depends on the plan
+        (the user’s security settings, or a workspace admin under Permissions & Roles → Connected Data).
+    You cannot change ChatGPT settings from this chat. Give the user the steps for the control on their screen.
+
+Interactive host other than ChatGPT (Claude, Codex, Cursor, Claude Desktop)
   → OAuth. Path A when the host can add a remote URL. Path B when it needs a local command.
     The Cursor plugin is Path B: install it, and the connector opens the sign-in page.
 
 Host plugin marketplace already lists “DealDesk” / agenthouse
   → Path C — Install from marketplace, then complete the agenthouse sign-in page
 
-Host can install a plugin ZIP (ChatGPT upload, or a local plugin folder)
+Host shows a plugin upload control, or accepts a local plugin folder
   → Path E — Download dealdesk-plugin-x.y.z.zip from GitHub Releases, then Connect
 
 Automation that cannot open a browser (CI)
@@ -78,6 +89,8 @@ If unsure, use OAuth. Do not start with an API key.
 5. Run **Verify** below.
 
 Do not configure `npx` or API keys for Path A unless the host cannot complete Connect. On Cursor, prefer the DealDesk plugin (Path B): it opens the sign-in page itself. A remote URL is enough only when that Cursor window actually opens the Connect page.
+
+On ChatGPT, use Path A only when that screen offers Add custom MCP server or Create an MCP app. If the screen is the plugin directory or an upload control, follow the ChatGPT branch above.
 
 ---
 
@@ -163,10 +176,10 @@ Exact marketplace UI labels differ by host. Prefer the host’s documented plugi
 
 ## Path E — Plugin ZIP
 
-Use this when the host installs a plugin package. The same ZIP is for ChatGPT, Claude, Cursor, and Codex. It is not a zip of the git repository.
+Use this when the host’s install screen has an upload control, or accepts a local plugin folder. The same ZIP works for ChatGPT, Claude, Cursor, and Codex when that host accepts a package. It is not a zip of the git repository. On ChatGPT, skip this path when Upload plugin is not on screen.
 
 1. Download `dealdesk-plugin-x.y.z.zip` from the latest release: https://github.com/agenthouse-org/dealdesk-plugin/releases
-2. ChatGPT: **Plugins → Upload plugin**. Other hosts: install that ZIP, or unpack it and install the plugin folder, using the host’s plugin flow.
+2. Where ChatGPT shows **Upload plugin**, upload that ZIP. On a managed workspace this is often Admin console → the workspace → Plugins → Add, and only for an owner, administrator, or a role with upload access. Other hosts: install that ZIP, or unpack it and install the plugin folder, using the host’s plugin flow.
 3. Complete Connect on agenthouse for `https://api.agenthouse.org/mcp/dealdesk`.
 4. Run **Verify**.
 

@@ -1,7 +1,7 @@
 {
   "name": "dealdesk",
   "displayName": "DealDesk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DealDesk skills and MCP tools for desk cards, email logs, quotes, customers, and portfolio publish.",
   "author": {
     "name": "agenthouse",

@@ -61,7 +61,7 @@ Commit the version in this repo, then publish a GitHub Release tagged `vX.Y.Z` (
 
 On npm, set the trusted publisher for `dealdesk-plugin` to GitHub Actions, repository `agenthouse-org/dealdesk-plugin`, workflow file `publish.yml`, and allow `npm publish`. The package has to exist before that publisher can be saved. No npm token is stored in GitHub.
 
-Directory review in the OpenAI portal also asks for a support URL, test cases, and a demo recording. Those are entered in the portal; they are not inside the ZIP.
+Public directory review also requires verified website, support, privacy, and terms URLs, review cases, a demo recording, and reviewer access. The package can carry listing and review metadata; complete and verify all materials before submitting through the OpenAI portal. A GitHub or npm release does not itself publish the plugin in the ChatGPT directory.
 
 ### Local connector
 

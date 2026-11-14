@@ -52,6 +52,8 @@ On an unaccepted quote card, `dealValueOverride` + `dealValueOverrideNet` replac
 
 `patch_card` with `companyId` / `contactId` (or `null` to clear). Clearing company also clears contact. Company/contact changes also sync a linked local case and quote customer link.
 
+For a linked draft quote, assignment also populates its company/contact details for the quote context and document template. Clearing the customer clears those draft details. Non-draft quote details remain unchanged.
+
 ## History
 
 `dealdesk.list_card_activity` returns stage/owner/account/note/quote/order/share milestones (not the comment/email timeline — that is status updates).

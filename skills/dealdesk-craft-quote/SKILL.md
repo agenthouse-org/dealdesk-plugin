@@ -19,3 +19,5 @@ Tools: `dealdesk.list_companies`, `dealdesk.get_company`, `dealdesk.create_compa
 8. Offer share link / PDF when ready. Never delete through MCP.
 
 Do not invent prices for CPQ lines client-side. Classic/open positions may carry explicit `unitPrice`.
+
+Opening an existing open quote in the DealDesk editor automatically fills empty customer sections from its directory link, or from an unambiguous linked card if the quote has no customer data or link. Existing details and closed quotes remain unchanged. MCP `get_quote` and `get_quote_summary` read persisted data and do not perform this repair. To assign a customer through MCP, use `dealdesk.patch_card`; linked draft quote details are populated with that assignment.

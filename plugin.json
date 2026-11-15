@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "dealdesk",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "DealDesk skills and MCP tools for desk cards, email logs, quotes, customers, and portfolio publish.",
   "author": {
     "name": "agenthouse",
@@ -48,7 +48,7 @@
         "commerce_description": "DealDesk supports commercial quotes and orders. The plugin does not process payments or provide online checkout. DealDesk access is purchased by contract through agenthouse.org.",
         "test_cases": {
           "positive": [
-            {"description":"In the reviewer project CHATGPTREVIEW01, list the seeded desk cards.","prompt":"List the open DealDesk cards in my project.","tools_triggered":"dealdesk.list_cards","expected_behavior":"Return the two seeded request-stage cards, Demo: workspace furniture proposal and Demo: meeting room refresh, based on the tool response."},
+            {"description":"In the reviewer project CHATGPTREVIEW01, list the seeded desk cards.","prompt":"List the open DealDesk cards in my project.","tools_triggered":"dealdesk.list_cards","expected_behavior":"List the returned open request-stage cards, including Demo: workspace furniture proposal and Demo: meeting room refresh if they remain open. Include other returned open cards and do not invent records."},
             {"description":"In the reviewer project, look up the seeded customer.","prompt":"Find Example Customer in the customer directory.","tools_triggered":"dealdesk.list_companies","expected_behavior":"Search with q set to Example Customer and identify Example Customer GmbH from the returned record; do not invent customer details."},
             {"description":"In the reviewer project, browse the published sample portfolio.","prompt":"What products are in my published portfolio?","tools_triggered":"dealdesk.discover, dealdesk.list_portfolio_articles","expected_behavior":"Discover the portfolio domain if necessary, then list the returned Demo workspace package article and its EUR 1200 basic price without inventing products."},
             {"description":"In the reviewer project, inspect the seeded workspace proposal card.","prompt":"Show me the details of the workspace furniture proposal card.","tools_triggered":"dealdesk.list_cards, dealdesk.get_card","expected_behavior":"Find the matching card and retrieve it using its returned cardId; report its description, request stage and linked Example Customer as returned."},

@@ -27,7 +27,7 @@ If MCP is not connected yet, still explain the command map and say which auth pa
 | `/dealdesk-quote-from-portfolio` | Evaluate a configuration and create a quote from the portfolio |
 | `/dealdesk-evaluate-configuration` | Evaluate a configuration without creating a quote |
 | `/dealdesk-directory-activity` | Company/contact commercial summary and notes |
-| `/dealdesk-find-or-create-customer` | Find or create a company or contact |
+| `/dealdesk-find-or-create-customer` | Find or create a company/contact and manage their relationship |
 | `/dealdesk-share-quote` | Quote status and customer share links (classic + rich) |
 | `/dealdesk-export-analysis` | Bounded Deal Intelligence export |
 | `/dealdesk-publish-portfolio` | Preview then confirm portfolio publish |
@@ -50,6 +50,7 @@ Hosts may prefix commands with the plugin name (for example `/dealdesk:dealdesk-
 ## Hard limits
 
 - Delete is unavailable through MCP and must be done manually in DealDesk. If asked to delete, explain that closing retains the record and offer it as a separate option; wait for explicit agreement before changing a card's stage or closing a share.
+- Company-contact relationships can be archived with `dealdesk.patch_relationship` (`status=archived`) and restored with `status=active`; archive is reversible, not permanent deletion.
 - Portfolio publish needs preview, then `portfolio_publish` with `confirm=true`.
 - Do not invent prices. Prefer portfolio evaluation and published revision ids.
 - Prefer `/dealdesk-export-analysis` over paging through large lists forever.

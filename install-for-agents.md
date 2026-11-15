@@ -206,7 +206,7 @@ Expect names such as `dealdesk.list_cards`, `dealdesk.create_card`, `dealdesk.lo
 ## After install — correct usage (brief)
 
 - **Card description** → `dealdesk.patch_card` / `create_card` with `description` (not unstructured “notes” as the main body).
-- **Card company/contact** → `companyId` / `contactId` on `create_card` or `patch_card` (`null` clears).
+- **Card company/contact** → `companyId` / `contactId` on `create_card` or `patch_card` (`null` clears). A contact’s company affiliation is a separate Customer Directory relationship; create it with `dealdesk.create_relationship` when the user confirms the association.
 - **Internal note** → `dealdesk.add_card_note`.
 - **Log email** → `dealdesk.log_email` (status-update touchpoint). **Never** store email as a card note.
 - **Soft-close** → update stage; delete tools are not offered.

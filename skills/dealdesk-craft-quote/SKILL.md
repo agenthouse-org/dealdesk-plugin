@@ -5,11 +5,11 @@ description: Guide the user to craft an excellent classic DealDesk quote. Use wh
 
 # Craft an excellent classic quote
 
-Tools: `dealdesk.list_companies`, `dealdesk.get_company`, `dealdesk.create_company`, `dealdesk.list_contacts`, `dealdesk.get_contact`, `dealdesk.create_contact`, `dealdesk.list_quotes`, `dealdesk.get_quote`, `dealdesk.get_quote_summary`, `dealdesk.create_quote`, `dealdesk.clone_quote`, `dealdesk.replace_quote_items`, `dealdesk.patch_quote`, `dealdesk.portfolio_summary`, `dealdesk.portfolio_evaluate`, `dealdesk.discover`, `dealdesk.list_portfolio_articles`, `dealdesk.get_portfolio_article`, `dealdesk.create_quote_from_configuration`, `dealdesk.update_quote_from_configuration`, `dealdesk.create_quote_share`, `dealdesk.render_quote_pdf`
+Tools: `dealdesk.list_companies`, `dealdesk.get_company`, `dealdesk.create_company`, `dealdesk.list_contacts`, `dealdesk.get_contact`, `dealdesk.create_contact`, `dealdesk.list_relationships`, `dealdesk.create_relationship`, `dealdesk.list_quotes`, `dealdesk.get_quote`, `dealdesk.get_quote_summary`, `dealdesk.create_quote`, `dealdesk.clone_quote`, `dealdesk.replace_quote_items`, `dealdesk.patch_quote`, `dealdesk.portfolio_summary`, `dealdesk.portfolio_evaluate`, `dealdesk.discover`, `dealdesk.list_portfolio_articles`, `dealdesk.get_portfolio_article`, `dealdesk.create_quote_from_configuration`, `dealdesk.update_quote_from_configuration`, `dealdesk.create_quote_share`, `dealdesk.render_quote_pdf`
 
 ## Conversation (classic-first)
 
-1. Confirm **company** and **contact** (search/create in the Customer Directory).
+1. Confirm **company** and **contact** (search/create in the Customer Directory). If the user confirms the contact belongs to that company, check for an active relationship using `list_relationships` with both IDs and create one if missing. A quote or card customer link does not create the directory relationship.
 2. Ask what the quote is **about** (title / intent).
 3. Always ask: scan past quotes and suggest a clone, copy a quote they like, or **create fresh**?
 4. Consult the **published portfolio** for recommended articles; confirm what belongs in the quote.

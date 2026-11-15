@@ -5,7 +5,7 @@ description: Create or update a DealDesk desk card, or respond to requests to de
 
 # Create or update a desk card
 
-Tools: `dealdesk.create_card`, `dealdesk.patch_card`, `dealdesk.get_card`, `dealdesk.list_cards`, `dealdesk.list_desk_stages`, `dealdesk.list_desk_users`, `dealdesk.list_card_activity`
+Tools: `dealdesk.create_card`, `dealdesk.patch_card`, `dealdesk.get_card`, `dealdesk.list_cards`, `dealdesk.list_desk_stages`, `dealdesk.list_desk_users`, `dealdesk.list_card_activity`, `dealdesk.list_relationships`, `dealdesk.create_relationship`
 
 Create a card or update title, stage, description, owner, priority, Customer Directory links, deal estimates, and quote deal-value override.
 
@@ -54,7 +54,7 @@ On an unaccepted quote card, `dealValueOverride` + `dealValueOverrideNet` replac
 
 ## Company / contact
 
-`patch_card` with `companyId` / `contactId` (or `null` to clear). Clearing company also clears contact. Company/contact changes also sync a linked local case and quote customer link.
+`create_card` / `patch_card` with `companyId` / `contactId` (or `null` to clear). Clearing company also clears contact. Company/contact changes also sync a linked local case and quote customer link. When the user identifies the contact as affiliated with the selected company, also make sure a directory relationship exists: search `list_relationships` by both IDs and create it with `create_relationship` if missing. The card link alone does not create that relationship.
 
 For a linked draft quote, assignment also populates its company/contact details for the quote context and document template. Clearing the customer clears those draft details. Non-draft quote details remain unchanged.
 

@@ -26,7 +26,7 @@ If MCP is not connected yet, still explain the command map and say which auth pa
 | `/dealdesk-quote-from-portfolio` | Evaluate a configuration and create a quote from the portfolio |
 | `/dealdesk-evaluate-configuration` | Evaluate a configuration without creating a quote |
 | `/dealdesk-directory-activity` | Company/contact commercial summary and notes |
-| `/dealdesk-find-or-create-customer` | Find or create a company or contact |
+| `/dealdesk-find-or-create-customer` | Find or create a company/contact and manage their relationship |
 | `/dealdesk-share-quote` | Quote status and customer share links (classic + rich) |
 | `/dealdesk-export-analysis` | Bounded Deal Intelligence export |
 | `/dealdesk-publish-portfolio` | Preview then confirm portfolio publish |

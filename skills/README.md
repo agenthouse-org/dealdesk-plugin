@@ -21,7 +21,7 @@ These notes describe common workflows the DealDesk MCP connector supports. Hosts
 | [dealdesk-quote-from-portfolio](./dealdesk-quote-from-portfolio/SKILL.md) | `/dealdesk-quote-from-portfolio` | Evaluate and create a quote from the published portfolio |
 | [dealdesk-evaluate-configuration](./dealdesk-evaluate-configuration/SKILL.md) | `/dealdesk-evaluate-configuration` | Side-effect free CPQ evaluation |
 | [dealdesk-directory-activity](./dealdesk-directory-activity/SKILL.md) | `/dealdesk-directory-activity` | Company/contact notes and commercial summary |
-| [dealdesk-find-or-create-customer](./dealdesk-find-or-create-customer/SKILL.md) | `/dealdesk-find-or-create-customer` | Directory company/contact lookup and create |
+| [dealdesk-find-or-create-customer](./dealdesk-find-or-create-customer/SKILL.md) | `/dealdesk-find-or-create-customer` | Directory company/contact lookup, create, and relationship management |
 | [dealdesk-share-quote](./dealdesk-share-quote/SKILL.md) | `/dealdesk-share-quote` | Quote status and customer share links (classic + rich) |
 | [dealdesk-manage-cases](./dealdesk-manage-cases/SKILL.md) | — | Local DealDesk cases |
 | [dealdesk-manage-orders](./dealdesk-manage-orders/SKILL.md) | — | Orders (discover `orders`) |

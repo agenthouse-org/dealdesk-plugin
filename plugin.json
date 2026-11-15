@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "dealdesk",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "DealDesk skills and MCP tools for desk cards, email logs, quotes, customers, and portfolio publish.",
   "author": {
     "name": "agenthouse",
@@ -23,7 +23,7 @@
         "composerIconDark": "./assets/logo-dark.png",
         "brandColor": "#090B09",
         "brandColorDark": "#9EFF3D",
-        "longDescription": "Work with your DealDesk project in ChatGPT. Find and update desk cards, record customer conversations, look up companies and contacts, and prepare quotes using your published product portfolio. Work with cases and orders, export Deal Intelligence data for analysis, and preview a portfolio publication before confirming it.\n\nConnect an agenthouse account with access to DealDesk, a paid CRM product. Your authorized project determines the data available. Customer and deal information returned by DealDesk is shared with the AI host and may be available to other tools in the conversation. Delete operations are not available through DealDesk MCP.",
+        "longDescription": "Work with your DealDesk project in ChatGPT. Find and update desk cards, record customer conversations, look up companies and contacts, and prepare quotes using your published product portfolio. Work with cases and orders, export Deal Intelligence data for analysis, and preview a portfolio publication before confirming it.\n\nConnect an agenthouse account with access to DealDesk. Your authorized project determines the data available. Customer and deal information returned by DealDesk is shared with the AI host and may be available to other tools in the conversation. Delete operations are not available through DealDesk MCP.",
         "developerName": "agenthouse",
         "category": "Business & Operations",
         "capabilities": ["Read", "Write"],

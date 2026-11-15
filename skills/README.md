@@ -4,7 +4,7 @@ These notes describe common workflows the DealDesk MCP connector supports. Hosts
 
 ## Guidelines
 
-- Prefer update and soft-close over delete. Delete is not offered through MCP.
+- Deletion is unavailable through MCP and must be done manually in DealDesk. Offer closing as a separate option, explain that the record remains, and wait for explicit agreement before making a substitute change.
 - Prefer the export skill for analysis instead of paging through large lists endlessly.
 - For portfolio publish, always review the preview and confirm before publishing.
 - Skill-gated tools need `dealdesk.discover` with the matching domain first. The server remembers that unlock for the API key or OAuth user.

@@ -20,7 +20,7 @@ If you are an AI assistant helping someone install DealDesk, follow **[install-f
 - Export Deal Intelligence workbooks for offline analysis  
 - Preview and confirm portfolio publish (with an explicit confirmation step)
 
-Destructive delete operations are not available. Soft-close cards by updating their stage instead.
+For safety, deletion is unavailable through MCP and must be done manually in DealDesk. Closing a card is a separate option that keeps the record; the assistant asks before closing a card in response to a deletion request.
 
 ## Customer data responsibility
 

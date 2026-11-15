@@ -1,13 +1,17 @@
 ---
 name: dealdesk-create-card
-description: Create or update a DealDesk desk card (title, stage, description, owner, priority, company/contact, deal estimates, quote value override). Use when the user wants a new card, a stage/owner change, estimates, or directory links. Never delete a card.
+description: Create or update a DealDesk desk card, or respond to requests to delete or close one. Never delete a card or replace a deletion request with closing without the user's explicit agreement.
 ---
 
 # Create or update a desk card
 
 Tools: `dealdesk.create_card`, `dealdesk.patch_card`, `dealdesk.get_card`, `dealdesk.list_cards`, `dealdesk.list_desk_stages`, `dealdesk.list_desk_users`, `dealdesk.list_card_activity`
 
-Create a card or update title, stage, description, owner, priority, Customer Directory links, deal estimates, and quote deal-value override. Soft-close by setting stage `closed` rather than deleting.
+Create a card or update title, stage, description, owner, priority, Customer Directory links, deal estimates, and quote deal-value override.
+
+## Deletion and closing
+
+For safety, deletion is unavailable through DealDesk MCP and must be done manually in DealDesk. When asked to delete a card, explain this and offer closing the card as a separate option. Closing retains the record and changes its stage; it is not deletion. Ask whether the user wants to close it, and wait for an explicit yes before making any change. Do not call `patch_card`, `patch_case`, or any other write tool as a substitute for deletion without that agreement. If the user explicitly requests closing the card, proceed with the normal stage-update workflow, using a stage returned by `list_desk_stages`.
 
 Use `description` for the main card body. Use `deskDescription` for a local desk-only description. Use `dealdesk.add_card_note` only for structured notes, not as a substitute for the card description.
 

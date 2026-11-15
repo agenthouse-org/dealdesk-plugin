@@ -49,7 +49,7 @@ Hosts may prefix commands with the plugin name (for example `/dealdesk:dealdesk-
 
 ## Hard limits
 
-- Delete is not available through MCP. Soft-close cards by changing stage; soft-close shares with `isOpen=false`.
+- Delete is unavailable through MCP and must be done manually in DealDesk. If asked to delete, explain that closing retains the record and offer it as a separate option; wait for explicit agreement before changing a card's stage or closing a share.
 - Portfolio publish needs preview, then `portfolio_publish` with `confirm=true`.
 - Do not invent prices. Prefer portfolio evaluation and published revision ids.
 - Prefer `/dealdesk-export-analysis` over paging through large lists forever.

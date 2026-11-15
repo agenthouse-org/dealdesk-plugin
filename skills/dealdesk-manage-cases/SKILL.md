@@ -7,7 +7,7 @@ description: List, create, and update DealDesk cases. Use for local sales/reques
 
 Tools: `dealdesk.list_cases`, `dealdesk.get_case`, `dealdesk.create_case`, `dealdesk.patch_case`, `dealdesk.list_desk_stages`, `dealdesk.list_desk_users`
 
-Create or update local DealDesk cases (title, stage, description, company/contact/quote links, estimates, ownerUserId). Resolve stages with `dealdesk.list_desk_stages` and owners with `dealdesk.list_desk_users`. Soft-close via stage when appropriate. Do not call disconnected Salesforce Opportunity search endpoints.
+Create or update local DealDesk cases (title, stage, description, company/contact/quote links, estimates, ownerUserId). Resolve stages with `dealdesk.list_desk_stages` and owners with `dealdesk.list_desk_users`. Deletion is unavailable through MCP and must be done manually in DealDesk. If asked to delete, explain that closing retains the record, offer it as an option, and wait for the user's explicit agreement before changing a stage or making any other substitute write. Do not call disconnected Salesforce Opportunity search endpoints.
 
 ## Stages (discrete column ids)
 
